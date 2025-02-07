@@ -32,7 +32,7 @@ Vue.component('kanban-column', {
             <button v-if="canCreate" @click="$emit('create')"
             class="btn-primary">
                 + Новая задача </button>
-            <div v-dor="card in cards" :key="card.id">
+            <div v-for="card in cards" :key="card.id">
                 <task-card :card="card"
                 :editable="true"
                 @edit="$emit('edit', card)"
@@ -183,17 +183,17 @@ new Vue({
         this.loadCards()
     },
     computed: {
-        plannedTasks(){
-            return this.cards.filter( c => c.column === 1)
+        plannedTasks() {
+            return this.cards.filter(c => c.column === 1);
         },
-        inProgressTasks(){
-            return this.cards.filter(c => c.column === 2)
+        inProgressTasks() {
+            return this.cards.filter(c => c.column === 2);
         },
-        testingTask(){
-            return this.cards.filter(c => c.column === 3)
+        testingTasks() {
+            return this.cards.filter(c => c.column === 3);
         },
-        completedTask(){
-            return this.cards.filter(c => c.column === 4)
+        completedTasks() {
+            return this.cards.filter(c => c.column === 4);
         }
     },
     methods: {
@@ -201,11 +201,11 @@ new Vue({
             this.selectedCard = null
             this.showEditModal = true
         },
-        openEditModal(){
+        openEditModal(card){
             this.selectedCard = card
             this.showEditModal = true
         },
-        openReturnModal(){
+        openReturnModal(card){
             this.currentCard = card
             this.showEditModal = true
         },
